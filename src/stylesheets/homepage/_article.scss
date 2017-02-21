@@ -1,0 +1,40 @@
+section {
+	margin: 0 0 30px 20px;
+	padding: 50px;
+	display: flex;
+	flex-flow: row nowrap;
+	background-color: $section-background-primary;
+	border-radius: 5px;
+	box-shadow: $main-item-shadow;
+
+	img {
+		height: 180px;
+		margin-right: 20px;
+	}
+
+	div.section-content {
+		flex: 1;
+
+		h2 {
+			color: $section-title-primary;
+			font-size: 22px;
+			font-family: $font-content;
+		}
+
+		p {
+			color: $section-text-primary;
+			font-size: 10px;
+			margin: 8px 0;
+			font-family: $font-content;
+		}
+
+		input, select {
+			padding: 8px 12px;
+			margin-bottom: 10px;
+			font-family: $font-content;
+			color: #333;
+			font-size: 14px;
+			display: block;
+		}
+	}
+}

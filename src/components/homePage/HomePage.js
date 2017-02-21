@@ -25,16 +25,56 @@ class HomePage extends Component {
 						  </ul>
 						  <div className="line"></div>
 						  <ul className="media-icons">
-							  	<i className="fa fa-facebook" aria-hidden="true"></i>
-								<i className="fa fa-instagram" aria-hidden="true"></i>
-								<i className="fa fa-twitter" aria-hidden="true"></i>
-								<i className="fa fa-reddit-alien" aria-hidden="true"></i>
+							  <li><i className="fa fa-facebook" aria-hidden="true"></i></li>
+							  <li><i className="fa fa-instagram" aria-hidden="true"></i></li>
+							  <li><i className="fa fa-twitter" aria-hidden="true"></i></li>
+							  <li><i className="fa fa-reddit-alien" aria-hidden="true"></i></li>
 						  </ul>
 					  </aside>
 				  </div>
 
 				  <div className="column-primary">
-
+					  <section>
+						  <img src="http://placehold.it/180x180" />
+						  <div className="section-content">
+							  <h2>
+								  Do you think free code camp is
+								  a positive service, or a terrible one?
+							  </h2>
+							  <p>SEPTEMBER 8, 2016 | ART</p>
+							  <input type="select" placeholder="Choose an option..." />
+							  <input type="text" placeholder="Sign in to add an option..." />
+						  </div>
+					  </section>
+					  <section>
+						  <img src="http://placehold.it/180x180" />
+						  <div className="section-content">
+							  <h2>
+								  Do you think free code camp is
+								  a positive service, or a terrible one?
+							  </h2>
+							  <p>SEPTEMBER 8, 2016 | ART</p>
+							  <input type="select" placeholder="Choose an option..." />
+							  <input type="text" placeholder="Sign in to add an option..." />
+						  </div>
+					  </section>
+					  <section>
+						  <img src="http://placehold.it/180x180" />
+						  <div className="section-content">
+							  <h2>
+								  Do you think free code camp is
+								  a positive service, or a terrible one?
+							  </h2>
+							  <p>SEPTEMBER 8, 2016 | ART</p>
+								  <select name="cars">
+									  <option value="volvo">Volvo</option>
+									  <option value="saab">Saab</option>
+									  <option value="fiat">Fiat</option>
+									  <option value="audi">Audi</option>
+								  </select>
+							  <input type="text" placeholder="Sign in to add an option..." />
+						  </div>
+					  </section>
 				  </div>
 			  </main>
 		  );

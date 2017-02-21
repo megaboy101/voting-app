@@ -2,13 +2,14 @@ aside {
 	padding: 20px;
 	border-radius: 5px;
 	background-color: $aside-background-main;
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.06);
+	box-shadow: $main-item-shadow;
 
 	img {
-		width: 70px;
+		width: 70%;
 		max-width: 100%;
 		border-radius: 100px;
 		margin: 0 auto 30px auto;
+		display: block;
 	}
 
 	p.user-stats {
@@ -47,11 +48,12 @@ aside {
 		list-style-type: none;
 
 		li {
-			margin-right: 10px;
+			display: inline-block;
 
 			 i {
-				 font-size: 14px;
-	 			color: #c7c7c7;
+				 font-size: 20px;
+				 color: #c7c7c7;
+				 margin-right: 10px;
 			 }
 		}
 	}
