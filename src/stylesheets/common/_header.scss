@@ -1,0 +1,35 @@
+header {
+	background-color: $header-background-primary;
+	padding: 25px 0;
+
+	div {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		align-items: center;
+
+		h1 {
+			font-size: 24px;
+			font-family: $font-title;
+			line-height: 100%;
+			color: $header-title-primary;
+
+			span {
+				font-size: 15px;
+				padding-left: 3px;
+			}
+		}
+
+		nav {
+			width: 150px;
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: space-between;
+			a {
+				color: $header-nav-secondary;
+				font-family: $font-content;
+				font-size: 14px;
+			}
+		}
+	}
+}
