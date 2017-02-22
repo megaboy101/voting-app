@@ -1,0 +1,41 @@
+div.content-creator {
+	display: flex;
+	flex-flow: row nowrap;
+	width: 100%;
+	height: 50px;
+	border-radius: 5px;
+	box-shadow: $main-item-shadow;
+	margin-bottom: 15px;
+
+	textarea {
+		font-family: $font-content;
+		border: none;
+		flex: 1;
+		padding: 14px 12px;
+		font-size: 16px;
+		border-bottom-left-radius: 5px;
+		border-top-left-radius: 5px;
+		resize: none;
+	}
+
+	select {
+		font-family: $font-content;
+		border: none;
+		flex: 1;
+		padding: 8px 12px;
+		background-color: $header-background-primary;
+		color: #f0f0f0;
+		font-size: 16px;
+	}
+
+	button {
+		font-family: $font-content;
+		border: none;
+		padding: 9px 15px;
+		color: $section-button-text;
+		background-color: $section-button-background;
+		font-size: 14px;
+		border-bottom-right-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+}

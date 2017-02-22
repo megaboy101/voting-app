@@ -33,7 +33,19 @@ class HomePage extends Component {
 					  </aside>
 				  </div>
 
-				  <div className="column-primary">
+				  <div className="column-main">
+					  <div className="content-creator">
+						  <textarea placeholder="Add a topic..."></textarea>
+						  <select name="topics">
+							  <option value="placeholder">Select a category...</option>
+							  <option value="art">Art</option>
+							  <option value="programming">Programming</option>
+							  <option value="politics">Politics</option>
+							  <option value="life/philosophy">Life/Philosophy</option>
+							  <option value="love/relationships">Love/Relationships</option>
+						  </select>
+						  <button>Publish</button>
+					  </div>
 					  <section>
 						  <img src="http://placehold.it/180x180" />
 						  <div className="section-content">
@@ -42,19 +54,13 @@ class HomePage extends Component {
 								  a positive service, or a terrible one?
 							  </h2>
 							  <p>SEPTEMBER 8, 2016 | ART</p>
-							  <input type="select" placeholder="Choose an option..." />
-							  <input type="text" placeholder="Sign in to add an option..." />
-						  </div>
-					  </section>
-					  <section>
-						  <img src="http://placehold.it/180x180" />
-						  <div className="section-content">
-							  <h2>
-								  Do you think free code camp is
-								  a positive service, or a terrible one?
-							  </h2>
-							  <p>SEPTEMBER 8, 2016 | ART</p>
-							  <input type="select" placeholder="Choose an option..." />
+								  <select name="cars">
+									  <option value="placeholder">Pick a response...</option>
+									  <option value="volvo">Volvo</option>
+									  <option value="saab">Saab</option>
+									  <option value="fiat">Fiat</option>
+									  <option value="audi">Audi</option>
+								  </select>
 							  <input type="text" placeholder="Sign in to add an option..." />
 						  </div>
 					  </section>
@@ -67,6 +73,25 @@ class HomePage extends Component {
 							  </h2>
 							  <p>SEPTEMBER 8, 2016 | ART</p>
 								  <select name="cars">
+									  <option value="placeholder">Pick a response...</option>
+									  <option value="volvo">Volvo</option>
+									  <option value="saab">Saab</option>
+									  <option value="fiat">Fiat</option>
+									  <option value="audi">Audi</option>
+								  </select>
+							  <input type="text" placeholder="Sign in to add an option..." />
+						  </div>
+					  </section>
+					  <section>
+						  <img src="http://placehold.it/180x180" />
+						  <div className="section-content">
+							  <h2>
+								  Do you think free code camp is
+								  a positive service, or a terrible one?
+							  </h2>
+							  <p>SEPTEMBER 8, 2016 | ART</p>
+								  <select name="cars">
+									  <option value="placeholder">Pick a response...</option>
 									  <option value="volvo">Volvo</option>
 									  <option value="saab">Saab</option>
 									  <option value="fiat">Fiat</option>
