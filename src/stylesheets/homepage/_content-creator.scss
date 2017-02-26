@@ -39,3 +39,11 @@ div.content-creator {
 		border-top-right-radius: 5px;
 	}
 }
+
+p.content-creator-placeholder {
+	text-align: center;
+	font-size: 20px;
+	color: $aside-icon-primary;
+	font-family: $font-content;
+	margin-bottom: 20px;
+}

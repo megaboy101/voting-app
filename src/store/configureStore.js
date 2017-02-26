@@ -17,21 +17,23 @@ export default function configureStore(initialState) {
 		pollsVoted: 0,
 		optionsCreated: 0,
 		verified: NO,
-		mostPopular: ["You haven't created any polls yet"],
-		pollsCreated: [
-			{
-				title: "",
-				dateCreated: "",
-				topic: "",
-				options: ["Pick a response..."],
-			}
+		mostPopularById: ["You haven't created any polls yet"],
+		pollsCreatedById: [
+			Symbol(),
+			Symbol()
 		]
 	},
 
 	polls: [
 		{
 			title: "",
-			dateCreated: "",
+			dateCreated: Date(),
+			topic: "",
+			options: ["Pick a response..."]
+		},
+		{
+			title: "",
+			dateCreated: Date(),
 			topic: "",
 			options: ["Pick a response..."]
 		}

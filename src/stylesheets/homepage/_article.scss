@@ -29,6 +29,14 @@ section {
 			text-transform: uppercase;
 		}
 
+		p.add-option-guest {
+			font-family: $font-content;
+			color: $section-text-primary;
+			font-size: 15px;
+			text-align: center;
+			margin: 15px 0;
+		}
+
 		input, select {
 			padding: 8px 12px;
 			margin-bottom: 10px;

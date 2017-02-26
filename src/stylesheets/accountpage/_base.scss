@@ -1,67 +1,17 @@
-section.section-account {
+section.section-username {
 	display: block;
+	padding: 20px;
 
 	h1 {
 		color: $section-title-primary;
 		font-family: $font-content;
 		font-size: 35px;
-		margin-bottom: 35px;
 	}
+}
 
-	h2 {
-		margin: 30px 0 20px 0;
-		color: $section-title-primary;
-		font-family: $font-content;
-		font-size: 25px;
-	}
-
-	p {
-		color: $section-title-primary;
-		margin-bottom: 20px;
-		line-height: 135%;
-		font-family: $font-content;
-		font-size: 14px;
-	}
-
-	div.form {
-		margin-bottom: 15px;
-		
-		h2 {
-			color: $section-title-primary;
-			font-family: $font-content;
-			font-size: 25px;
-			margin-bottom: 5px;
-		}
-
-		input {
-			padding: 8px 12px;
-			width: 100%;
-			font-size: 14px;
-			color: #333;
-			line-height: 135%;
-			font-family: $font-content;
-			margin-bottom: 10px;
-		}
-
-		button {
-			padding: 9px 15px;
-			font-size: 14px;
-			font-family: $font-content;
-			color: $section-button-text;
-			background-color: $section-button-background;
-			border: none;
-		}
-	}
-
-	button.signout {
-		padding: 15px 0;
-		width: 120px;
-		font-size: 17px;
-		font-family: $font-content;
-		color: $section-button-text;
-		background-color: $header-background-primary;
-		border: none;
-		margin: 0 auto;
-		display: block;
-	}
+p.poll-list-placeholder {
+	text-align: center;
+	font-size: 20px;
+	color: $aside-icon-primary;
+	font-family: $font-content;
 }

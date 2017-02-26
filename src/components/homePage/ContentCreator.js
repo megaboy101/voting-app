@@ -16,7 +16,7 @@ class ContentCreator extends Component {
 
 	submitPoll() {
 		if (this.state.title !== "" && this.state.topic !== "Select a category...") {
-			this.props.createPoll(this.state.title, this.state.topic);
+			this.props.createPoll(this.state.title, this.state.topic, this.props.loggedIn);
 			this.setState({title: "", topic: "Select a category..."});
 		}
 	}
@@ -30,6 +30,10 @@ class ContentCreator extends Component {
 	}
 
 	render() {
+		if (!this.props.loggedIn) {
+			return <p className="content-creator-placeholder">Log in to create polls</p>;
+		}
+
 		return (
 			<div className="content-creator">
 			   <textarea value={this.state.title} placeholder="Add a topic..." onChange={this.changeTitle}></textarea>
@@ -48,12 +52,18 @@ class ContentCreator extends Component {
 };
 
 
+function mapStateToProps(state) {
+	return {
+		loggedIn: state.user.id
+	};
+};
+
 function mapDispatchToProps(dispatch) {
 	return {
-		createPoll: function(title, topic) {
-			dispatch(updatePolls(title, topic));
+		createPoll: function(title, topic, userId) {
+			dispatch(updatePolls(title, topic, userId));
 		}
 	};
 };
 
-export default connect(null, mapDispatchToProps)(ContentCreator);
+export default connect(mapStateToProps, mapDispatchToProps)(ContentCreator);

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Poll from './Poll.js';
-import { updateOption } from '../../actions/pollsActions.js';
+import Poll from '../common/Poll.js';
+import { updateOption, deletePoll } from '../../actions/pollsActions.js';
 
-const PollList = ({ polls, handleUpdateOption }) => {
+const PollList = ({ polls, loggedIn, userPolls, handleUpdateOption, handleDeletePoll }) => {
 	let key = 0;
 	const pollsHTML = polls.map(poll => {
 		key++;
@@ -15,6 +15,9 @@ const PollList = ({ polls, handleUpdateOption }) => {
 				date={poll.date}
 				topic={poll.topic}
 				options={poll.options}
+				deletePoll={handleDeletePoll}
+				loggedIn={loggedIn}
+				usersPolls={userPolls}
 				updateOption={handleUpdateOption} />
 		);
 	});
@@ -28,7 +31,9 @@ const PollList = ({ polls, handleUpdateOption }) => {
 
 function mapStateToProps(state) {
 	return {
-		polls: state.polls
+		polls: state.polls,
+		loggedIn: state.user.id,
+		userPolls: state.user.pollsCreatedById
 	};
 };
 
@@ -38,6 +43,10 @@ function mapDispatchToProps(dispatch) {
 			if (keyCode == 13 && inputState !== "") {
 				dispatch(updateOption(id, inputState));
 			}
+		},
+
+		handleDeletePoll: function(id, userId) {
+			dispatch(deletePoll(id, userId));
 		}
 	}
 };
