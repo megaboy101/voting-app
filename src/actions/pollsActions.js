@@ -1,7 +1,7 @@
 import * as actions from './constants.js';
-import { downloadPolls, pollsWithUpdatedOption, updateWithNewPoll, updateWithDeletedPoll } from '../api/mockApi.js';
+import { downloadPolls, pollsWithUpdatedOption, updateWithNewPoll, updateWithDeletedPoll, updateWithNewVote } from '../api/api.js';
 
-// Create an async action to load polls
+// Standard startup action to load the current state of polls from the database
 export function loadPolls() {
 	return dispatch => {
 		return downloadPolls().then(polls => {
@@ -24,23 +24,34 @@ export function updateOption(id, option) {
 }
 
 // Update the polls list with a new poll, given the polls chosen title and topic
-export function updatePolls(title, topic, userId) {
+export function updatePolls(title, topic, owner) {
 	return dispatch => {
-		return updateWithNewPoll(title, topic, userId).then((polls, user) => {
-			dispatch({type: actions.UPDATED_POLLS, polls, user});
+		return updateWithNewPoll(title, topic, owner).then(polls => {
+			dispatch({type: actions.LOAD_POLLS, polls});
 		}).catch(err => {
 			throw(err);
 		});
 	}
 }
 
-export function deletePoll(id, userId) {
+// Delete a poll given its id
+export function deletePoll(pollId) {
 	return dispatch => {
-		console.log(userId);
-		return updateWithDeletedPoll(id, userId).then((polls, user) => {
-			dispatch({type: actions.UPDATED_POLLS, polls, user});
+		return updateWithDeletedPoll(pollId).then(polls => {
+			dispatch({type: actions.LOAD_POLLS, polls});
 		}).catch(err => {
 			throw(err);
 		});
+	}
+}
+
+// Update the votes on a specific option within a poll
+export function updateVotes(pollId, choice) {
+	return dispatch => {
+		return updateWithNewVote(pollId, choice).then(polls => {
+			dispatch({type: actions.LOAD_POLLS, polls});
+		}).catch(err => {
+			throw(err);
+		})
 	}
 }

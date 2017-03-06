@@ -12,30 +12,28 @@ export default function configureStore(initialState) {
 {
 	user: {
 		username: "Guest",
-		password: "",
-		pollsCreated: 0,
-		pollsVoted: 0,
-		optionsCreated: 0,
-		verified: NO,
-		mostPopularById: ["You haven't created any polls yet"],
-		pollsCreatedById: [
-			Symbol(),
-			Symbol()
-		]
 	},
 
 	polls: [
 		{
 			title: "",
-			dateCreated: Date(),
+			dateCreated: Date.now(),
 			topic: "",
-			options: ["Pick a response..."]
+			owner: 'username'
+			options: {
+				firstOption: 0,
+				secondOption: 2
+			}
 		},
 		{
 			title: "",
 			dateCreated: Date(),
 			topic: "",
-			options: ["Pick a response..."]
+			owner: 'username'
+			options: {
+				firstOption: 0,
+				secondOption: 2
+			}
 		}
 	]
 }

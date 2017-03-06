@@ -1,60 +1,11 @@
 aside {
-	padding: 20px;
-	border-radius: 5px;
-	background-color: $aside-background-main;
-	box-shadow: $main-item-shadow;
+	border-radius: 100px;
+	overflow: hidden;
 
 	img {
-		width: 70%;
+		width: 100%;
 		max-width: 100%;
-		border-radius: 100px;
-		margin: 0 auto 30px auto;
+		margin: 0 auto 0 auto;
 		display: block;
-	}
-
-	p.user-stats {
-		font-size: 14px;
-		color: $aside-text-primary;
-		font-family: $font-content;
-		margin-bottom: 20px;
-		line-height: 145%;
-	}
-
-	div.line {
-		width: 90px;
-		border-bottom: 1px solid #c7c7c7;
-		margin: 15px 0;
-	}
-
-	h3 {
-		font-size: 14px;
-		font-family: $font-content;
-		color: $aside-text-primary;
-		margin-bottom: 15px;
-	}
-
-	ul.top-polls {
-		list-style-type: none;
-
-		li {
-			margin-bottom: 15px;
-			font-family: $font-content;
-			font-size: 14px;
-			color: $aside-text-secondary;
-		}
-	}
-
-	ul.media-icons {
-		list-style-type: none;
-
-		li {
-			display: inline-block;
-
-			 i {
-				 font-size: 20px;
-				 color: #c7c7c7;
-				 margin-right: 10px;
-			 }
-		}
 	}
 }

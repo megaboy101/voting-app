@@ -47,3 +47,31 @@ p.content-creator-placeholder {
 	font-family: $font-content;
 	margin-bottom: 20px;
 }
+
+
+@media screen and (max-width: 550px) {
+	div.content-creator {
+		flex-flow: column nowrap;
+		height: auto;
+
+		textarea {
+			font-size: 13px;
+			padding: 8px;
+			border-radius: 0;
+			border-top-right-radius: 5px;
+			border-top-left-radius: 5px;
+		}
+
+		select {
+			font-size: 13px;
+			padding: 6px 10px;
+		}
+
+		button {
+			padding: 8px 10px;
+			border-radius: 0;
+			border-bottom-right-radius: 5px;
+			border-bottom-left-radius: 5px;
+		}
+	}
+}

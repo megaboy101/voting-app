@@ -33,3 +33,17 @@ header {
 		}
 	}
 }
+
+@media screen and (max-width: 550px) {
+	header {
+		div {
+			h1 {
+				font-size: 18px;
+
+				span {
+					display: none;
+				}
+			}
+		}
+	}
+}

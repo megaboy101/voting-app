@@ -16,3 +16,15 @@ main {
 		width: 75%;
 	}
 }
+
+@media screen and (max-width: 775px) {
+	main {
+		div.column-aside {
+			display: none;
+		}
+
+		div.column-main {
+			width: 100%;
+		}
+	}
+}

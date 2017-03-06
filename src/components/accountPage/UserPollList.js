@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Poll from '../common/Poll.js';
-import { updateOption } from '../../actions/pollsActions.js';
+import { updateOption, deletePoll, updateVotes } from '../../actions/pollsActions.js';
 
-const UserPollList = ({ polls, loggedIn, handleUpdateOption }) => {
+const UserPollList = ({ filteredpolls, username, handleUpdateOption, handleDeletePoll, handleUpdateVotes }) => {
 	let key = 0;
 	let pollsHTML;
 
-	if (loggedIn) {
-		pollsHTML = polls.map(poll => {
+	if (username !== "Guest") {
+		pollsHTML = filteredpolls.map(poll => {
 			key++;
 			return (
 				<Poll
@@ -18,6 +18,10 @@ const UserPollList = ({ polls, loggedIn, handleUpdateOption }) => {
 					date={poll.date}
 					topic={poll.topic}
 					options={poll.options}
+					owner={poll.owner}
+					deletePoll={handleDeletePoll}
+					userName={username}
+					updateVotes={handleUpdateVotes}
 					updateOption={handleUpdateOption} />
 			);
 		}).reverse();
@@ -33,15 +37,9 @@ const UserPollList = ({ polls, loggedIn, handleUpdateOption }) => {
 };
 
 function mapStateToProps(state) {
-	let filteredPolls = [];
-	if (state.user.pollsCreatedById) {
-		filteredPolls = state.polls.filter(poll => {
-			return state.user.pollsCreatedById.indexOf(poll.id) !== -1;
-		});
-	}
 	return {
-		polls: filteredPolls,
-		loggedIn: state.user.id
+		filteredpolls: state.polls.filter(poll => poll.owner == state.user.username)
+		username: state.user.username
 	};
 };
 
@@ -51,6 +49,14 @@ function mapDispatchToProps(dispatch) {
 			if (keyCode == 13 && inputState !== "") {
 				dispatch(updateOption(id, inputState));
 			}
+		},
+
+		handleDeletePoll: function(pollId) {
+			dispatch(deletePoll(pollId));
+		},
+
+		handleUpdateVotes: function(pollId, choice) {
+			dispatch(updateVotes(pollId, choice));
 		}
 	}
 };

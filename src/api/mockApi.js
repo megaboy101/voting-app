@@ -4,38 +4,34 @@ const mockPolls = [
 		title: "Here is the second poll, now with options",
 		date: "OCTOBER 23, 2015",
 		topic: "politics",
-		options: ["Pick a response...", "option #1", "option #2"]
+		options: [{name: "option #1", votes: 1}, {name: "option #2", votes: 1}]
 	},
 	{
 		id: Symbol(),
 		title: "Here is the first poll",
 		date: "DECEMBER 10, 2017",
 		topic: "art",
-		options: ["Pick a response..."]
+		options: []
 	}
 ];
 
 export const mockUsers = [
 	{
 		id: Symbol(),
-		username: "Megaboy",
-		password: "megaboy",
 		pollsCreated: 0,
 		pollsVoted: 0,
 		optionsCreated: 0,
 		verified: "YES",
-		mostPopularById: [],
+		pollsVotedById: [],
 		pollsCreatedById: []
 	},
 	{
 		id: Symbol(),
-		username: "Jacob",
-		password: "thejacob",
 		pollsCreated: 3,
 		pollsVoted: 6,
 		optionsCreated: 1,
 		verified: "YES",
-		mostPopularById: [],
+		pollsVotedById: [],
 		pollsCreatedById: []
 	}
 ];
@@ -56,7 +52,7 @@ export function pollsWithUpdatedOption(id, option) {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
 			let editingPollIndex = mockPolls.indexOf(mockPolls.filter(poll => poll.id == id)[0]); // Filter out wrong ids from the array of polls, then return the first (only) element from the resulting array
-			mockPolls[editingPollIndex].options.push(option);
+			mockPolls[editingPollIndex].options.push({name: option, votes: 0});
 			resolve(mockPolls);
 		}, delay);
 	})
@@ -78,7 +74,7 @@ export function updateWithNewPoll(title, topic, userId) {
 				title,
 				date: `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`,
 				topic,
-				options: ["Pick a response..."]
+				options: []
 			});
 
 			let user = mockUsers.filter(user => user.id == userId)[0];
@@ -114,5 +110,33 @@ export function updateWithDeletedPoll(pollId, userId) {
 
 			resolve(mockPolls, mockUsers.filter(user => user.id == userId)[0]);
 		}, delay);
+	});
+}
+
+export function updateWithNewVote(pollId, choice, userId) {
+	return new Promise((resolve, reject) => {
+		let user = mockUsers.filter(user => user.id == userId)[0];
+
+		if (user.pollsVotedById.indexOf(pollId) == -1) {
+			// Update the poll with the vote
+			let poll = mockPolls.filter(poll => poll.id == pollId)[0];
+			let pollIndex = mockPolls.indexOf(poll);
+
+			let pollOption = poll.options.filter(option => option.name == choice)[0];
+			let pollOptionIndex = poll.options.indexOf(pollOption);
+			pollOption.votes += 1;
+			poll.options.splice(pollOptionIndex, 1, pollOption)
+
+			mockPolls.splice(pollIndex, 1, poll);
+
+			// Update the user so they cant vote twice
+			let userIndex = mockUsers.indexOf(user);
+			user.pollsVotedById.push(pollId);
+			mockUsers.splice(userIndex, 1, user);
+
+			resolve(mockPolls, user);
+		} else {
+			alert('You can only vote on a poll once');
+		}
 	});
 }

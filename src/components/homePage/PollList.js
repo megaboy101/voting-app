@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Poll from '../common/Poll.js';
-import { updateOption, deletePoll } from '../../actions/pollsActions.js';
+import { updateOption, deletePoll, updateVotes } from '../../actions/pollsActions.js';
 
-const PollList = ({ polls, loggedIn, userPolls, handleUpdateOption, handleDeletePoll }) => {
+const PollList = ({ polls, username, handleUpdateOption, handleDeletePoll, handleUpdateVotes }) => {
 	let key = 0;
 	const pollsHTML = polls.map(poll => {
 		key++;
@@ -15,16 +15,16 @@ const PollList = ({ polls, loggedIn, userPolls, handleUpdateOption, handleDelete
 				date={poll.date}
 				topic={poll.topic}
 				options={poll.options}
+				owner={poll.owner}
 				deletePoll={handleDeletePoll}
-				loggedIn={loggedIn}
-				usersPolls={userPolls}
+				updateVotes={handleUpdateVotes}
 				updateOption={handleUpdateOption} />
 		);
-	});
+	}).reverse();
 
 	return (
 		<div>
-			{pollsHTML.reverse()}
+			{pollsHTML}
 		</div>
 	);
 };
@@ -32,8 +32,7 @@ const PollList = ({ polls, loggedIn, userPolls, handleUpdateOption, handleDelete
 function mapStateToProps(state) {
 	return {
 		polls: state.polls,
-		loggedIn: state.user.id,
-		userPolls: state.user.pollsCreatedById
+		username: state.user.username
 	};
 };
 
@@ -45,8 +44,12 @@ function mapDispatchToProps(dispatch) {
 			}
 		},
 
-		handleDeletePoll: function(id, userId) {
-			dispatch(deletePoll(id, userId));
+		handleDeletePoll: function(id) {
+			dispatch(deletePoll(id));
+		},
+
+		handleUpdateVotes: function(pollId, choice) {
+			dispatch(updateVotes(pollId, choice));
 		}
 	}
 };

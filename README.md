@@ -1,8 +1,5 @@
 # TODO
-1. Finish styles for the delete button
-2. Setup profile-widget to show actual stats
-3. Finalize front-end
-3. Setup back-end api
+1. Setup user authentication
 
 
 ### Passport setup

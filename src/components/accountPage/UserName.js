@@ -1,17 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const UserName = ({ loggedIn, username }) => {
-    if (loggedIn) {
-        return (
-           <section className="section-username">
-              <h1>{username}</h1>
-           </section>
-        );
-    }
+const UserName = ({ username }) => {
     return (
       <section className="section-username">
-         <h1>Guest</h1>
+         <h1>{username}</h1>
       </section>
    );
 }
@@ -19,7 +12,6 @@ const UserName = ({ loggedIn, username }) => {
 
 function mapStateToProps(state) {
    return {
-      loggedIn: state.user.id,
       username: state.user.username
    }
 }
