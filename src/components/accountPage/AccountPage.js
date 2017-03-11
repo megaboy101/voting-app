@@ -24,4 +24,5 @@ class AccountPage extends Component {
     }
 }
 
+
 export default AccountPage;

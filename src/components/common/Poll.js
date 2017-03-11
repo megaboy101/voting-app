@@ -7,14 +7,16 @@ const Poll = ({ id, title, date, topic, options, owner, userName, updateOption, 
 	// Dynamically add poll options
 	let optionInput;
 	let optionsList = [];
+	let key = 0;
 	for (let option in options) {
 		optionsList.push(
 			<option
-				key={i}
+				key={key}
 				value={option.toLowerCase()}>
 					{option} - {options[option]}
 			</option>
 		);
+		key++;
 	}
 
 	// Dynamically show input to add options

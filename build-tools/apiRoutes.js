@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import passport from 'passport';
 import Poll from './models/pollModel.js';
 import User from './models/userModel.js';
 
@@ -6,9 +7,16 @@ const router = Router();
 
 
 // Api Routes
-router.use((req, res, next) => {
-	console.log('Api request made.');
-	next();
+
+
+// Authentication routes
+router.get('/auth/twitter',
+	passport.authenticate('twitter'));
+
+router.get('/loginSuccess',
+	passport.authenticate('twitter'),
+	(req, res) => {
+	res.redirect('/');
 });
 
 /*
@@ -127,6 +135,10 @@ router.route('/polls/:pollId')
 			res.json(polls);
 		});
 	});
+
+router.get('/currentUser', (req, res) => {
+	res.send(req.user);
+});
 
 
 export default router;

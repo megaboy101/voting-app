@@ -12,7 +12,7 @@ const colors = [
 ];
 
 const Graph = ({ data }) => {
-	let formatted Data = [];
+	let formattedData = [];
 	for (let option in data) {
 		formattedData.push({name: option, value: data[option]});
 	}
@@ -21,7 +21,7 @@ const Graph = ({ data }) => {
     return (
         <PieChart width={180} height={180}>
 			  <Pie data={formattedData} innerRadius={35} outerRadius={55} fill="#ff3333">
-				  {data.map((entry, index) => <Cell key={key} fill={colors[index % colors.length]}/>)}
+				  {formattedData.map((entry, index) => <Cell key={key} fill={colors[index % colors.length]}/>)}
 			  </Pie>
 			  <Legend wrapperStyle={{ fontFamily: 'Lato', fontSize: '12px' }} />
 		  </PieChart>

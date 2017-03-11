@@ -1,7 +1,6 @@
 import express from 'express';
 import webpack from 'webpack';
 import passport from 'passport';
-import twitter from 'passport-twitter';
 import session from 'express-session';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
@@ -9,6 +8,8 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import path from 'path';
 import config from '../webpack.config.dev.js';
 import router from './apiRoutes.js';
+import authConfig from './passportConfig.js';
+
 
 // Node server config
 const port = process.env.PORT || 3000;
@@ -16,11 +17,11 @@ const port = process.env.PORT || 3000;
 // Express server config
 const app = express();
 
-// Webpack sercer config
+// Webpack server config
 const compiler = webpack(config);
 
 // Connect to database
-// mongoose.connect('mongodb://megaboy101:megaboy101@ds163699.mlab.com:63699/voting-app');
+mongoose.connect('mongodb://megaboy101:megaboy101@ds163699.mlab.com:63699/voting-app');
 
 // Webpack middleware
 app.use(webpackDevMiddleware(compiler, {
@@ -28,9 +29,26 @@ app.use(webpackDevMiddleware(compiler, {
 	publicPath: config.output.publicPath
 }));
 
+// Passport server config
+authConfig(passport);
+
 // Body-parser middleware
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+// Passport/session middleware
+app.use(session({
+	secret: 'kendrick',
+	resave: false,
+	saveUninitialized: false,
+	cookie: {
+		httpOnly: false,
+		secure: false
+	}
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Api routing custom middleware
 app.use('/api', router);

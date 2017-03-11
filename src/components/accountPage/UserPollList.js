@@ -38,7 +38,7 @@ const UserPollList = ({ filteredpolls, username, handleUpdateOption, handleDelet
 
 function mapStateToProps(state) {
 	return {
-		filteredpolls: state.polls.filter(poll => poll.owner == state.user.username)
+		filteredpolls: state.polls.filter(poll => poll.owner == state.user.username),
 		username: state.user.username
 	};
 };

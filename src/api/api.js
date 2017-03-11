@@ -1,3 +1,10 @@
+/*
+    - Load the polls after publishing a new poll
+    - Check that user created polls appear in their account list of polls
+*/
+
+
+
 // GET
 export function downloadPolls() {
     return new Promise((resolve, reject) => {
@@ -85,7 +92,7 @@ export function updateWithDeletedPoll(pollId) {
 // PUT
 export function updateWithNewVote(pollId, option) {
     return new Promise((resolve, reject) => {
-        let req = new Request('/api/polls/' + pollId);
+        let req = new Request('/api/polls' + pollId);
         fetch(req, {
             method: 'PUT',
             headers: {
@@ -96,5 +103,21 @@ export function updateWithNewVote(pollId, option) {
         })
         .then(res => res.json())
         .then(polls => resolve(polls));
+    });
+}
+
+export function downloadUser() {
+    return new Promise((resolve, reject) => {
+        let req = new Request('/api/currentUser');
+        // When working with session data (cookies), fetch requires you add 'credentials'
+        fetch(req, {
+            credentials: 'include'
+        })
+        .then(res => {
+            return res.json();
+        })
+        .then(user => {
+            resolve(user);
+        });
     });
 }
