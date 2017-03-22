@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import UserWidget from '../common/UserWidget.js';
-import UserPollList from './UserPollList.js';
+import PollList from '../common/PollList.js';
 import UserName from './UserName.js';
 
 class AccountPage extends Component {
@@ -10,17 +10,17 @@ class AccountPage extends Component {
 
     render() {
         return (
-			  <main className="container-main">
-				  <div className="column-aside">
-					  <UserWidget />
-				   </div>
+            <main className="container-main">
+                <div className="column-aside">
+                    <UserWidget />
+                </div>
 
-				   <div className="column-main">
-                  <UserName />
-                  <UserPollList />
-				   </div>
-			  </main>
-		  );
+                <div className="column-main">
+                    <UserName />
+                    <PollList filter="user" />
+                </div>
+            </main>
+        );
     }
 }
 

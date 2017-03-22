@@ -34,7 +34,6 @@ export default (passport) => {
                     newUser.save((err) => {
                         if (err)
                             throw err;
-                            console.log('Created a new user: ' + newUser.username);
                         return done(null, newUser);
                     });
                 }

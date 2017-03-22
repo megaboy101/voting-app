@@ -11,5 +11,5 @@ export function loadUser() {
         }).catch(err => {
             throw(err);
         });
-    }
-};
+    };
+}

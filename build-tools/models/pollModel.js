@@ -5,6 +5,7 @@ const Poll = mongoose.model('Poll', new Schema({
     title: String,
     topic: String,
     dateCreated: String,
+    owner: String,
     options: Schema.Types.Mixed
 }));
 

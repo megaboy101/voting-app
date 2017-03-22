@@ -4,66 +4,72 @@ import { updatePolls } from '../../actions/pollsActions.js';
 
 
 class ContentCreator extends Component {
-	constructor(props, context) {
-		super(props, context);
+    constructor(props, context) {
+        super(props, context);
 
-		this.state = {title: "", topic: "Select a category..."};
+        this.state = {title: '', topic: 'Select a category...', owner: props.username};
 
-		this.submitPoll = this.submitPoll.bind(this);
-		this.changeTitle = this.changeTitle.bind(this);
-		this.changeTopic = this.changeTopic.bind(this);
-	}
+        this.submitPoll = this.submitPoll.bind(this);
+        this.changeTitle = this.changeTitle.bind(this);
+        this.changeTopic = this.changeTopic.bind(this);
+    }
 
-	submitPoll() {
-		if (this.state.title !== "" && this.state.topic !== "Select a category...") {
-			this.props.createPoll(this.state.title, this.state.topic, this.props.username);
-			this.setState({title: "", topic: "Select a category..."});
-		}
-	}
+    componentWillReceiveProps(nextProps) {
+        if (this.props.username !== nextProps.username) {
+            this.setState({owner: nextProps.username});
+        }
+    }
 
-	changeTitle(e) {
-		this.setState({title: e.target.value});
-	}
+    submitPoll() {
+        if (this.state.title !== '' && this.state.topic !== 'Select a category...') {
+            this.props.createPoll(this.state.title, this.state.topic, this.props.username);
+            this.setState({title: '', topic: 'Select a category...'});
+        }
+    }
 
-	changeTopic(e) {
-		this.setState({topic: e.target.value});
-	}
+    changeTitle(e) {
+        this.setState({title: e.target.value});
+    }
 
-	render() {
-		if (this.props.username === "Guest") {
-			return <p className="content-creator-placeholder">Log in to create polls</p>;
-		}
+    changeTopic(e) {
+        this.setState({topic: e.target.value});
+    }
 
-		return (
+    render() {
+        if (this.props.username === 'Guest') {
+            return <p className="content-creator-placeholder">Log in to create polls</p>;
+        }
+
+        return (
 			<div className="content-creator">
-			   <textarea value={this.state.title} placeholder="Add a topic..." onChange={this.changeTitle}></textarea>
-			   <select value={this.state.topic} name="topics" onChange={this.changeTopic}>
-				   <option value="placeholder">Select a category...</option>
-				   <option value="art">Art</option>
-				   <option value="programming">Programming</option>
-				   <option value="politics">Politics</option>
-				   <option value="life/philosophy">Life/Philosophy</option>
-				   <option value="love/relationships">Love/Relationships</option>
-			   </select>
-			   <button onClick={this.submitPoll}>Publish</button>
-		   </div>
-		);
-	}
-};
+                <textarea value={this.state.title} placeholder="Add a topic..." onChange={this.changeTitle}></textarea>
+                <select value={this.state.topic} name="topics" onChange={this.changeTopic}>
+                    <option value="placeholder">Select a category...</option>
+                    <option value="art">Art</option>
+                    <option value="programming">Programming</option>
+                    <option value="politics">Politics</option>
+                    <option value="life/philosophy">Life/Philosophy</option>
+                    <option value="love/relationships">Love/Relationships</option>
+                </select>
+                <button onClick={this.submitPoll}>Publish</button>
+            </div>
+        );
+    }
+}
 
 
 function mapStateToProps(state) {
-	return {
-		username: state.user.username
-	};
-};
+    return {
+        username: state.user.username
+    };
+}
 
 function mapDispatchToProps(dispatch) {
-	return {
-		createPoll: function(title, topic, owner) {
-			dispatch(updatePolls(title, topic, owner));
-		}
-	};
-};
+    return {
+        createPoll: function(title, topic, owner) {
+            dispatch(updatePolls(title, topic, owner));
+        }
+    };
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentCreator);

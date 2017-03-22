@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import express from 'express';
 import webpack from 'webpack';
 import passport from 'passport';
@@ -25,8 +26,8 @@ mongoose.connect('mongodb://megaboy101:megaboy101@ds163699.mlab.com:63699/voting
 
 // Webpack middleware
 app.use(webpackDevMiddleware(compiler, {
-	noInfo: true,
-	publicPath: config.output.publicPath
+    noInfo: true,
+    publicPath: config.output.publicPath
 }));
 
 // Passport server config
@@ -38,13 +39,13 @@ app.use(bodyParser.json());
 
 // Passport/session middleware
 app.use(session({
-	secret: 'kendrick',
-	resave: false,
-	saveUninitialized: false,
-	cookie: {
-		httpOnly: false,
-		secure: false
-	}
+    secret: 'kendrick',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: false,
+        secure: false
+    }
 }));
 
 app.use(passport.initialize());
@@ -56,14 +57,14 @@ app.use('/api', router);
 
 // Client routes (handled client-side by react router) MUST COME LAST
 app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, '../src/index.html'));
+    res.sendFile(path.join(__dirname, '../src/index.html'));
 });
 
 
 // Startup server
 app.listen(port, (err) => {
-	if (err)
-		throw err;
+    if (err)
+        throw err;
 
-	console.log('Server running on port: ' + port);
+    console.log('Server running on port: ' + port);
 });

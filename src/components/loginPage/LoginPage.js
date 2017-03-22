@@ -8,12 +8,4 @@ const LoginPage = () => {
     );
 };
 
-function mapDispatchToProps(dispatch) {
-   return {
-      login: function() {
-         dispatch(loadUser());
-      }
-   };
-}
-
 export default LoginPage;

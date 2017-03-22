@@ -1,17 +1,17 @@
 import * as actions from '../actions/constants.js';
 
-export default function(state = {username: "Guest"}, action) {
+export default function(state = {username: 'Guest'}, action) {
     switch(action.type) {
-        case actions.LOAD_USER:
-            if (action.user.username) {
-                return {
-                    username: action.user.username
-                };
-            }
+    case actions.LOAD_USER:
+        if (action.user.username) {
             return {
-                username: 'Guest'
+                username: action.user.username
             };
-        default:
-            return state;
+        }
+        return {
+            username: 'Guest'
+        };
+    default:
+        return state;
     }
 }

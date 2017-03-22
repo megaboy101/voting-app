@@ -1,18 +1,17 @@
 import React from 'react';
-import Header from './components/'
 
 class App extends React.Component {
-	constructor(props, context) {
-		super(props, context);
-	}
+    constructor(props, context) {
+        super(props, context);
+    }
 
-	render() {
-		return (
+    render() {
+        return (
 			<div>
 				{this.props.children}
 			</div>
-		);
-	}
+        );
+    }
 }
 
 
