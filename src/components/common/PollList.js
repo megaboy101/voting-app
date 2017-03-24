@@ -11,9 +11,7 @@ class PollList extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.polls.length !== nextProps.polls.length) {
-            this.setState({polls: nextProps.polls});
-        }
+        this.setState({polls: nextProps.polls});
     }
 
     render() {
@@ -30,6 +28,7 @@ class PollList extends Component {
 					options={poll.options}
 					owner={poll.owner}
 					userName={this.props.username}
+                    voterList={poll.voterList}
 					deletePoll={this.props.handleDeletePoll}
 					updateVotes={this.props.handleUpdateVotes}
 					updateOption={this.props.handleUpdateOption} />
@@ -74,8 +73,8 @@ function mapDispatchToProps(dispatch) {
             dispatch(deletePoll(id));
         },
 
-        handleUpdateVotes: function(pollId, choice) {
-            dispatch(updateVotes(pollId, choice));
+        handleUpdateVotes: function(pollId, choice, username) {
+            dispatch(updateVotes(pollId, choice, username));
         }
     };
 }

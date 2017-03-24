@@ -13,8 +13,8 @@ const colors = [
 
 const Graph = ({ data }) => {
     let formattedData = [];
-    for (let option in data) {
-        formattedData.push({name: option, value: data[option]});
+    for (let option of data) {
+        formattedData.push({name: option[0], value: option[1]});
     }
 
     let key = 0;

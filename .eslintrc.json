@@ -33,6 +33,7 @@
             "error",
             "always"
         ],
+        "no-console": 1,
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error"
     }

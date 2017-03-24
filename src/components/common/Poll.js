@@ -1,18 +1,17 @@
 import React from 'react';
 import Graph from './Graph.js';
 
-
-const Poll = ({ id, title, date, topic, options, owner, userName, updateOption, deletePoll, updateVotes }) => {
-	// Dynamically add poll options
+const Poll = ({ id, title, date, topic, options, owner, userName, voterList, updateOption, deletePoll, updateVotes }) => {
+    // Dynamically add poll options
     let optionInput;
     let optionsList = [];
     let key = 0;
-    for (let option in options) {
+    for (let option of options) {
         optionsList.push(
 			<option
 				key={key}
-				value={option.toLowerCase()}>
-					{option} - {options[option]}
+				value={option[0]}>
+					{option[0]} - {option[1]}
 			</option>
 		);
         key++;
@@ -49,7 +48,7 @@ const Poll = ({ id, title, date, topic, options, owner, userName, updateOption, 
                     {title}
 				</h2>
 				<p>{date} | {topic}</p>
-                    <select onChange={e => updateVotes(id, e.target.value)}>
+                    <select onChange={e => verifyAndVote(id, e.target.value, owner, userName, voterList, updateVotes)}>
 						<option key={999} value={'Vote on an option...'}>Vote on an option...</option>
                             {optionsList}
                     </select>
@@ -59,5 +58,12 @@ const Poll = ({ id, title, date, topic, options, owner, userName, updateOption, 
 		</section>
     );
 };
+
+function verifyAndVote(id, choice, owner, userName, voterList, func) {
+    if (voterList.indexOf(owner) === -1)
+        func(id, choice, userName);
+    else
+        console.log('You already voted for this poll.');
+}
 
 export default Poll;

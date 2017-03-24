@@ -1,10 +1,10 @@
 import * as actions from './constants.js';
-import { downloadPolls, pollsWithUpdatedOption, updateWithNewPoll, updateWithDeletedPoll, updateWithNewVote } from '../api/api.js';
+import { fetchPolls, updatePollOption, addPoll, removePoll, updatePollVote } from '../api/api.js';
 
 // Standard startup action to load the current state of polls from the database
 export function loadPolls() {
     return dispatch => {
-        return downloadPolls().then(polls => {
+        return fetchPolls().then(polls => {
             dispatch({type: actions.LOAD_POLLS, polls});
         }).catch(err => {
             throw(err);
@@ -12,46 +12,31 @@ export function loadPolls() {
     };
 }
 
-// Update the options for a poll, given the polls id, and the option to add
 export function updateOption(id, option) {
     return dispatch => {
-        return pollsWithUpdatedOption(id, option).then(polls => {
-            dispatch({type: actions.LOAD_POLLS, polls});
-        }).catch(err => {
-            throw(err);
-        });
+        updatePollOption(id, option)
+        .then(() => dispatch(loadPolls()));
     };
 }
 
-// Update the polls list with a new poll, given the polls chosen title and topic
 export function updatePolls(title, topic, owner) {
     return dispatch => {
-        return updateWithNewPoll(title, topic, owner).then(polls => {
-            dispatch({type: actions.LOAD_POLLS, polls});
-        }).catch(err => {
-            throw(err);
-        });
+        addPoll(title, topic, owner)
+        .then(() => dispatch(loadPolls()));
     };
 }
 
-// Delete a poll given its id
 export function deletePoll(pollId) {
     return dispatch => {
-        return updateWithDeletedPoll(pollId).then(polls => {
-            dispatch({type: actions.LOAD_POLLS, polls});
-        }).catch(err => {
-            throw(err);
-        });
+        removePoll(pollId)
+        .then(() => dispatch(loadPolls()));
     };
 }
 
-// Update the votes on a specific option within a poll
-export function updateVotes(pollId, choice) {
+export function updateVotes(pollId, choice, username) {
+    console.log(pollId, choice, username);
     return dispatch => {
-        return updateWithNewVote(pollId, choice).then(polls => {
-            dispatch({type: actions.LOAD_POLLS, polls});
-        }).catch(err => {
-            throw(err);
-        });
+        updatePollVote(pollId, choice, username)
+        .then(() => dispatch(loadPolls()));
     };
 }

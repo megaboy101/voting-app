@@ -4,8 +4,9 @@ const Poll = mongoose.model('Poll', new Schema({
     id: Schema.Types.ObjectId,
     title: String,
     topic: String,
-    dateCreated: String,
+    date: String,
     owner: String,
+    voterList: Schema.Types.Mixed,
     options: Schema.Types.Mixed
 }));
 

@@ -1,32 +1,15 @@
-/*
-    - Load the polls after publishing a new poll
-    - Check that user created polls appear in their account list of polls
-    - Make sure the poll components are getting all the data they need
-*/
-
-
-
 // GET
-export function downloadPolls() {
+export function fetchPolls() {
     return new Promise(resolve => {
-        // Initialize a dynamic request URL (maps it to the caller, so localhost or Heroku!)
         const req = new Request('/api/polls');
-
-        // Fetch function with request url as sole parameter
         fetch(req)
-            // Fetch returns a Response promise, this must first be parsed into JSON
-            .then(res => {
-                return res.json();
-            })
-            // Returns a JSON promise, this res can be used like any other JSON object
-            .then(polls => {
-                resolve(polls);
-            });
+            .then(res => res.json())
+            .then(polls => resolve(polls));
     });
 }
 
 // POST
-export function pollsWithUpdatedOption(id, option) {
+export function updatePollOption(id, option) {
     return new Promise(resolve => {
         const req = new Request(`/api/polls/${id}`);
 
@@ -40,14 +23,14 @@ export function pollsWithUpdatedOption(id, option) {
             },
 			// DONT FORGET TO STRINGIFY
             body: JSON.stringify({option})
-        });
+        }).then(() => resolve());
 
-        downloadPolls().then(polls => resolve(polls));
+
     });
 }
 
 // POST
-export function updateWithNewPoll(title, topic, owner) {
+export function addPoll(title, topic, owner) {
     return new Promise(resolve => {
         let d = new Date();
         const months = [
@@ -60,9 +43,9 @@ export function updateWithNewPoll(title, topic, owner) {
             owner,
             date: `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`,
             topic,
+            voterList: [],
             options: []
         };
-
 
         let req = new Request('/api/polls');
         fetch(req, {
@@ -72,46 +55,38 @@ export function updateWithNewPoll(title, topic, owner) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(newPoll)
-        })
-        .then(res => res.json())
-        .then(polls => {
-            resolve(polls);
-        });
+        }).then(() => resolve());
     });
 }
 
 // DELETE
-export function updateWithDeletedPoll(pollId) {
+export function removePoll(pollId) {
     return new Promise(resolve => {
         let req = new Request('/api/polls/' + pollId);
         fetch(req, {
             method: 'DELETE'
-        })
-        .then(res => res.json())
-        .then(polls => resolve(polls));
+        }).then(() => resolve());
     });
 }
 
 // PUT
-export function updateWithNewVote(pollId, option) {
+export function updatePollVote(pollId, option, username) {
     return new Promise(resolve => {
-        let req = new Request('/api/polls' + pollId);
+        let req = new Request('/api/polls/' + pollId);
         fetch(req, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({option})
-        })
-        .then(res => res.json())
-        .then(polls => resolve(polls));
+            body: JSON.stringify({option, username})
+        }).then(() => resolve());
     });
 }
 
 export function downloadUser() {
     return new Promise(resolve => {
-        let req = new Request('/api/currentUser');
+        let req = new Request('/api/currentuser');
         // When working with session data (cookies), fetch requires you add 'credentials'
         fetch(req, {
             credentials: 'include'

@@ -11,7 +11,7 @@ export default function configureStore(initialState) {
 /*
 {
 	user: {
-		username: "Guest",
+		username: "Guest"
 	},
 
 	polls: [
@@ -29,7 +29,8 @@ export default function configureStore(initialState) {
 			title: "",
 			dateCreated: Date(),
 			topic: "",
-			owner: 'username'
+			owner: 'username',
+            voters: [],
 			options: {
 				firstOption: 0,
 				secondOption: 2
