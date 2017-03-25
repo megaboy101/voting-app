@@ -33,18 +33,9 @@ const Poll = ({ id, title, date, topic, options, owner, userName, voterList, upd
     }
 
 	// Dynamically show delete button
-    let userSettings = '';
+    let deleteButton = '';
     if (userName === owner) {
-        userSettings =
-        <div className="poll-options">
-            <button onClick={() => deletePoll(id)} className="delete-button">Delete</button>
-            <a className="twitter-share-button"
-                href="https://twitter.com/intent/tweet?text=I%20voted%20on%20a%20poll!"
-                target="_blank">
-                <i className="fa fa-twitter" aria-hidden="true"></i>
-            </a>
-            <script async src="//platform.twitter.com/widgets.js"></script>
-        </div>;
+        deleteButton = <button onClick={() => deletePoll(id)} className="delete-button">Delete</button>;
     }
 
     return (
@@ -62,7 +53,15 @@ const Poll = ({ id, title, date, topic, options, owner, userName, voterList, upd
                             {optionsList}
                     </select>
 				{addOptionInput}
-                {userSettings}
+                <div className="poll-options">
+                    {deleteButton}
+                    <a className="twitter-share-button"
+                        href="https://twitter.com/intent/tweet?text=I%20voted%20on%20a%20poll!"
+                        target="_blank">
+                        <i className="fa fa-twitter" aria-hidden="true"></i>
+                    </a>
+                    <script async src="//platform.twitter.com/widgets.js"></script>
+                </div>
 			</div>
 		</section>
     );
