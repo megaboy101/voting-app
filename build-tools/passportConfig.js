@@ -16,7 +16,7 @@ export default (passport) => {
     passport.use(new Strategy({
         consumerKey: 'TDSE9fQIriyHgtu5U0G2ghg4j',
         consumerSecret: 'Na19LYD0vTgrnMkKApTuacq9RQSUBOfAkEbTPGMfU6BMEhWREV',
-        callbackURL: 'http://localhost:3000/api/loginSuccess'
+        callbackURL: `https://${process.env.DOMAIN}/api/loginSuccess`
     }, (token, tokenSecret, profile, done) => {
         process.nextTick(() => {
             // There may be an error here, not sure on the profile object properties
