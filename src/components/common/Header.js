@@ -6,7 +6,7 @@ const Header = ({ username }) => {
     let loginLink;
     if (username === 'Guest') {
         loginLink =
-        <a className="login-link" href={'http://localhost:3000/api/auth/twitter'}>
+        <a className="login-link" href={'/api/auth/twitter'}>
             <i className="fa fa-twitter" aria-hidden="true"></i>
             Login with Twitter
         </a>;
