@@ -9,6 +9,10 @@ section {
 
 	div.graph {
 		align-self: center;
+        position: relative;
+        right: 20px;
+        top: -20px;
+
 	}
 
 	div.section-content {
@@ -46,14 +50,28 @@ section {
 			width: 100%;
 		}
 
-		button {
-			border: none;
-			background-color: #ff3434;
-			color: white;
-			font-family: $font-content;
-			font-size: 14px;
-			padding: 5px 8px;
-		}
+        div.poll-options {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+
+            button {
+    			border: none;
+    			background-color: #ff3434;
+    			color: white;
+    			font-family: $font-content;
+    			font-size: 14px;
+    			padding: 5px 8px;
+    		}
+
+            a.twitter-share-button {
+                i {
+                    color: #1DA1F2;
+                    font-size: 24px;
+                }
+            }
+        }
 	}
 }
 
@@ -63,6 +81,7 @@ section {
 
 		div.graph {
 			margin: 15px;
+            position: static;
 		}
 
 		div.section-content {

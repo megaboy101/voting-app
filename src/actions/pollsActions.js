@@ -34,7 +34,6 @@ export function deletePoll(pollId) {
 }
 
 export function updateVotes(pollId, choice, username) {
-    console.log(pollId, choice, username);
     return dispatch => {
         updatePollVote(pollId, choice, username)
         .then(() => dispatch(loadPolls()));

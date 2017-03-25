@@ -1,12 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 
-const UserWidget = () => {
+const UserWidget = ({ image }) => {
     return (
 		<aside>
-			<img src="http://placehold.it/70x70" />
+            <img src={image} alt="Failed to load profile image" />
 		</aside>
     );
 };
 
-export default UserWidget;
+function mapStateToProps(state) {
+    return {
+        image: state.user.profilePic.replace('_normal', '')
+    };
+}
+
+export default connect(mapStateToProps)(UserWidget);

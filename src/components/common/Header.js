@@ -1,19 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
-const Header = () =>
-	<header>
-		<div className="container-main">
-			<h1>
-				Opinionated
-				<span>Have an opinion</span>
-			</h1>
-			<nav>
-				<Link to="/">Home</Link>
-				<Link to="/account">Account</Link>
-				<Link to="/login">Login</Link>
-			</nav>
-		</div>
-	</header>;
+const Header = ({ username }) => {
+    let loginLink;
+    if (username === 'Guest') {
+        loginLink =
+        <a className="login-link" href={'http://localhost:3000/api/auth/twitter'}>
+            <i className="fa fa-twitter" aria-hidden="true"></i>
+            Login with Twitter
+        </a>;
+    }
+    else {
+        loginLink = <span>Welcome, {username}</span>;
+    }
 
-export default Header;
+    return (
+        <header>
+            <div className="container-main">
+                <h1>
+                    Opinionated
+                    <span>Have an opinion</span>
+                </h1>
+                <nav>
+                    <Link to="/">Home</Link>
+                    <Link to="/account">Account</Link>
+                    {loginLink}
+                </nav>
+            </div>
+        </header>
+    );
+};
+
+export default connect(state => ({username: state.user.username}))(Header);

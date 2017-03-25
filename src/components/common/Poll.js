@@ -1,7 +1,7 @@
 import React from 'react';
 import Graph from './Graph.js';
 
-const Poll = ({ id, title, date, topic, options, owner, userName, voterList, updateOption, deletePoll, updateVotes }) => {
+const Poll = ({ id, title, date, topic, options, owner, userName, voterList, updateOption, deletePoll, updateVotes}) => {
     // Dynamically add poll options
     let optionInput;
     let optionsList = [];
@@ -18,7 +18,7 @@ const Poll = ({ id, title, date, topic, options, owner, userName, voterList, upd
     }
 
 	// Dynamically show input to add options
-    let addOptionInput = <p className="add-option-guest">Sign in to add custom options</p>;
+    let addOptionInput = <p className="add-option-guest">Log in to add custom options</p>;
     if (userName !== 'Guest') {
         addOptionInput =
 		<input
@@ -33,9 +33,18 @@ const Poll = ({ id, title, date, topic, options, owner, userName, voterList, upd
     }
 
 	// Dynamically show delete button
-    let deleteButton = '';
-    if (userName == owner) {
-        deleteButton = <button onClick={() => deletePoll(id)} className="delete-button">Delete</button>;
+    let userSettings = '';
+    if (userName === owner) {
+        userSettings =
+        <div className="poll-options">
+            <button onClick={() => deletePoll(id)} className="delete-button">Delete</button>
+            <a className="twitter-share-button"
+                href="https://twitter.com/intent/tweet?text=I%20voted%20on%20a%20poll!"
+                target="_blank">
+                <i className="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <script async src="//platform.twitter.com/widgets.js"></script>
+        </div>;
     }
 
     return (
@@ -48,22 +57,26 @@ const Poll = ({ id, title, date, topic, options, owner, userName, voterList, upd
                     {title}
 				</h2>
 				<p>{date} | {topic}</p>
-                    <select onChange={e => verifyAndVote(id, e.target.value, owner, userName, voterList, updateVotes)}>
+                    <select onChange={e => verifyAndVote(id, e.target.value, userName, voterList, updateVotes)}>
 						<option key={999} value={'Vote on an option...'}>Vote on an option...</option>
                             {optionsList}
                     </select>
 				{addOptionInput}
-				{deleteButton}
+                {userSettings}
 			</div>
 		</section>
     );
 };
 
-function verifyAndVote(id, choice, owner, userName, voterList, func) {
-    if (voterList.indexOf(owner) === -1)
+function verifyAndVote(id, choice, userName, voterList, func) {
+    if (userName === 'Guest' && localStorage.getItem(id) !== 'YES') {
+        localStorage.setItem(id, 'YES');
+        func(id, choice, userName);
+    }
+    else if (voterList.indexOf(userName) === -1)
         func(id, choice, userName);
     else
-        console.log('You already voted for this poll.');
+        alert('You can only vote for a poll once.');
 }
 
 export default Poll;

@@ -30,6 +30,7 @@ export default (passport) => {
                 else {
                     let newUser = new User();
                     newUser.username = profile.username;
+                    newUser.profilePic = profile.photos[0].value;
 
                     newUser.save((err) => {
                         if (err)

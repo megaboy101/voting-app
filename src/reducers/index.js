@@ -4,5 +4,5 @@ import user from './userReducer.js';
 
 export default combineReducers({
     polls,
-    user
+    user,
 });

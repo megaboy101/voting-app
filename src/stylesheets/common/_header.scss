@@ -21,20 +21,36 @@ header {
 		}
 
 		nav {
-			width: 150px;
+            width: 260px;
 			display: flex;
 			flex-flow: row nowrap;
 			justify-content: space-between;
-			a {
+            align-items: center;
+
+			a, span {
 				color: $header-nav-secondary;
 				font-family: $font-content;
 				font-size: 14px;
 			}
+
+            a.login-link {
+                color: white;
+				font-family: $font-content;
+				font-size: 14px;
+                padding: 5px;
+                border-radius: 5px;
+                background-color: #1DA1F2;
+                box-shadow: $main-item-shadow;
+
+                i {
+                    padding: 0 5px;
+                }
+            }
 		}
 	}
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 580px) {
 	header {
 		div {
 			h1 {
